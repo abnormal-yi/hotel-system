@@ -134,16 +134,4 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pos/{id}/complete', [POSController::class, 'complete'])->name('pos.complete')->middleware('role:creator,manager,receptionist');
 });
 
-// TEMPORARY: Run migrations after upload (REMOVE after use!)
-Route::get('/setup-migrate', function () {
-    Artisan::call('migrate --seed --force');
-    return '<pre>' . Artisan::output() . '</pre>';
-});
-
-// TEMPORARY: Create storage link (REMOVE after use!)
-Route::get('/setup-storage', function () {
-    Artisan::call('storage:link');
-    return '<pre>' . Artisan::output() . '</pre>';
-});
-
 Route::redirect('/', '/login');
